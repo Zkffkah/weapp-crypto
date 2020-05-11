@@ -1,0 +1,51 @@
+
+.ticker-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  font-size: 22px;
+  background: #fff;
+
+  &-symbol {
+    font-size: 36px;
+    color: #000000;
+    margin-left: 20px;
+  }
+
+  &-right-container {
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+    margin-right: 20px;
+  }
+
+  &-price {
+    font-size: 36px;
+    color: #000000;
+    margin-right: 20px;
+  }
+
+  &-percentage-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 5px;
+  }
+
+  &-percentage-up {
+    background: #38b30a;
+  }
+
+  &-percentage-down {
+    background: #d50d0d;
+  }
+
+  &-percentage-text {
+    font-size: 36px;
+    color: #ffffff;
+  }
+}
