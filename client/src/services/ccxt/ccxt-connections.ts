@@ -3,10 +3,11 @@ import * as ccxt from 'ccxt';
 export const HUOBI_PRO = 'huobipro'
 export const BINANCE = 'binance'
 import {reverseReq} from "@/utils/reverseReq";
+import Taro from '@tarojs/taro';
 
 function fetch(url, params) {
   return new Promise((resolve, reject) => {
-    reverseReq({
+    let promise = process.env.TARO_ENV === 'weapp' ? reverseReq({
       url: url,
       method: params.method,
       // header:params.headers,
@@ -15,8 +16,18 @@ function fetch(url, params) {
       },
       timeout: params.timeout,
       data: params.body
-    }).then((res) => {
-      console.log( Object.keys(res.header).reduce((result, key) => {
+    }) : Taro.request({
+      url: url,
+      method: params.method,
+      // header:params.headers,
+      header: {
+        "x-requested-with": "weapp.test.com"
+      },
+      timeout: params.timeout,
+      data: params.body
+    })
+    promise.then((res) => {
+      console.log(Object.keys(res.header).reduce((result, key) => {
         result[key] = res.header[key]
         return result;
       }, new Map()))
@@ -33,6 +44,7 @@ function fetch(url, params) {
       return resolve(object)
     }).catch(error => {
       console.log(error)
+      reject(error)
     })
   })
 }
@@ -55,7 +67,10 @@ export class CCXTConnection {
         fetchImplementation: fetch
       });
       //reverse proxy
-      exchangeInstance.proxy = 'https://corsreverse.herokuapp.com/';
+      if (process.env.TARO_ENV !== 'weapp' ){
+        //no cors in weapp
+        exchangeInstance.proxy = 'https://corsreverse.herokuapp.com/';
+      }
       this.connectionMap.set(exchange, exchangeInstance);
     }
   }
