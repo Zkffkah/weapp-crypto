@@ -45,7 +45,7 @@ export const getOption = (ticker, tickData) => {
 
   const option = {
     title: {
-      text: ticker.symbol, left: 0,
+      text: "", left: 0,
     },
     tooltip: {
       trigger: 'axis',
@@ -56,7 +56,6 @@ export const getOption = (ticker, tickData) => {
     },
     legend: {
       data: ['日K', 'MA5', 'MA10', 'MA20', 'MA30'],
-      top: "4%"
     },
     grid: [{
       left: '1%', right: '1%', height: '60%',
@@ -147,7 +146,7 @@ export const getOption = (ticker, tickData) => {
     dataZoom: [{
       type: 'inside',
       xAxisIndex: [0, 0],
-      start: 30,
+      start: 85,
       end: 100,
     }, {
       show: true,
@@ -155,13 +154,13 @@ export const getOption = (ticker, tickData) => {
       type: 'slider',
       top: '95%',
       height: '4%',
-      start: 30,
+      start: 85,
       end: 100,
     }, {
       show: false,
       xAxisIndex: [0, 2],
       type: 'slider',
-      start: 30,
+      start: 85,
       end: 100,
     }],
     series: [{
