@@ -18,6 +18,18 @@ interface IState {
 
 class Home extends Component<IProps, IState> {
 
+  /**
+   * 指定config的类型声明为: Taro.Config
+   *
+   * 由于 typescript 对于 object 类型推导只能推出 Key 的基本类型
+   * 对于像 navigationBarTextStyle: 'black' 这样的推导出的类型是 string
+   * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
+   */
+  config: Config = {
+    navigationBarTitleText: '行情',
+    enablePullDownRefresh: true
+  }
+
   constructor(props) {
     super(props);
     this.state = {}
@@ -27,6 +39,7 @@ class Home extends Component<IProps, IState> {
   }
 
   async componentDidMount() {
+    Tips.loading('正在加载中...');
     await this.getData()
   }
 
@@ -39,12 +52,17 @@ class Home extends Component<IProps, IState> {
   componentDidHide() {
   }
 
+
+  async onPullDownRefresh() {
+    await this.getData()
+  }
+
   async getData() {
-    Tips.loading('正在加载中...');
     await this.props.dispatch({
       type: `${namespace}/getTickers`,
       callback: status => {
         Tips.loaded();
+        Taro.stopPullDownRefresh()
         if (status === 'ok') {
           Tips.success('行情信息已更新');
         }
@@ -52,16 +70,6 @@ class Home extends Component<IProps, IState> {
     })
   }
 
-  /**
-   * 指定config的类型声明为: Taro.Config
-   *
-   * 由于 typescript 对于 object 类型推导只能推出 Key 的基本类型
-   * 对于像 navigationBarTextStyle: 'black' 这样的推导出的类型是 string
-   * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
-   */
-  config: Config = {
-    navigationBarTitleText: '行情'
-  }
 
   navigateTo(item: Ticker) {
     Taro.navigateTo({url: `/pages/symbolDetail/symbolDetail?symbolData=${encodeURIComponent(JSON.stringify(item))}`})
@@ -70,7 +78,7 @@ class Home extends Component<IProps, IState> {
   render() {
     console.log(this.props.tickers)
     return (
-      <ScrollView className="ticker-scroll-view" scrollY={true}>
+      <View className="ticker-container-view">
         {this.props.tickers.map((item, index) => {
           return (
             <View className="ticker-item" onClick={this.navigateTo.bind(this, item)} key={item.symbol}>
@@ -93,7 +101,7 @@ class Home extends Component<IProps, IState> {
 
           )
         })}
-      </ScrollView>
+      </View>
     )
   }
 }
