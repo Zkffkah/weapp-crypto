@@ -82,20 +82,21 @@ class Home extends Component<IProps, IState> {
         {this.props.tickers.map((item, index) => {
           return (
             <View className="ticker-item" onClick={this.navigateTo.bind(this, item)} key={item.symbol}>
-              <Text className="ticker-item-symbol">
-                {item.symbol}
-              </Text>
-              <View className="ticker-item-right-container">
-                <Text className="ticker-item-price">
+              <View className="ticker-item-symbol">
+                <Text >
+                  {item.symbol}
+                </Text>
+              </View>
+              <View className="ticker-item-price">
+                <Text>
                   {item.last.toFixed(6)}
                 </Text>
-                <View
-                  className={`ticker-item-percentage-item ${item.percentage > 0 ? "ticker-item-percentage-up" : "ticker-item-percentage-down"}`}>
-                  <Text className="ticker-item-percentage-text">
-                    {item.percentage.toFixed(2)}%
-                  </Text>
-                </View>
-
+              </View>
+              <View
+                className={`ticker-item-percentage-item ${item.percentage > 0 ? "ticker-item-percentage-up" : "ticker-item-percentage-down"}`}>
+                <Text className="ticker-item-percentage-text">
+                  {item.percentage.toFixed(2)}%
+                </Text>
               </View>
             </View>
 

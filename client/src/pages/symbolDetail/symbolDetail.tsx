@@ -80,15 +80,17 @@ class SymbolDetail extends Component<IProps, IState> {
       <View className={"symbol-detail"}>
         <View className={"symbol-detail-header"}>
           <View className={"symbol-detail-header-left"}>
-            <Text className={`symbol-detail-header-left-big-item ${this.state.ticker.last > this.state.ticker.close ? "symbol-detail-price-up" : "symbol-detail-price-down"}`}>
+            <Text
+              className={`symbol-detail-header-left-big-item ${this.state.ticker.last > this.state.ticker.close ? "symbol-detail-price-up" : "symbol-detail-price-down"}`}>
               {this.state.ticker.last}
             </Text>
             <View className={"symbol-detail-header-left-bottom"}>
-
-              <Text className={`symbol-detail-header-left-bottom-first ${this.state.ticker.change > 0 ? "symbol-detail-price-up" : "symbol-detail-price-down"}`}>
+              <Text
+                className={`symbol-detail-header-left-bottom-first ${this.state.ticker.change > 0 ? "symbol-detail-price-up" : "symbol-detail-price-down"}`}>
                 {this.state.ticker.change && this.state.ticker.change.toFixed(2)}
               </Text>
-              <Text className={`${this.state.ticker.percentage > 0 ? "symbol-detail-price-up" : "symbol-detail-price-down"}`}>
+              <Text
+                className={`${this.state.ticker.percentage > 0 ? "symbol-detail-price-up" : "symbol-detail-price-down"}`}>
                 {this.state.ticker.percentage && this.state.ticker.percentage.toFixed(2)}%
               </Text>
             </View>
@@ -96,32 +98,46 @@ class SymbolDetail extends Component<IProps, IState> {
           </View>
           <View className={"symbol-detail-header-right"}>
             <View className={"symbol-detail-header-right-first"}>
-              <View>
-                最高:
-                <Text className={`symbol-detail-header-right-number-item ${this.state.ticker.high > this.state.ticker.close ? "symbol-detail-price-up" : "symbol-detail-price-down"}`}>
-                   {this.state.ticker.high}
+              <View className={"symbol-detail-header-right-item-container"}>
+                <Text className={`symbol-detail-header-right-text-item`}>最高:</Text>
+                <Text
+                  className={`symbol-detail-header-right-number-item ${this.state.ticker.high > this.state.ticker.close ? "symbol-detail-price-up" : "symbol-detail-price-down"}`}>
+                  {this.state.ticker.high}
                 </Text>
               </View>
-              <View>
-                最低:
-                <Text className={`symbol-detail-header-right-number-item ${this.state.ticker.low > this.state.ticker.close ? "symbol-detail-price-up" : "symbol-detail-price-down"}`}>
+              <View className={"symbol-detail-header-right-item-container"}>
+                <Text className={`symbol-detail-header-right-text-item`}>最低:</Text>
+                <Text
+                  className={`symbol-detail-header-right-number-item ${this.state.ticker.low > this.state.ticker.close ? "symbol-detail-price-up" : "symbol-detail-price-down"}`}>
                   {this.state.ticker.low}
                 </Text>
               </View>
-              <Text className={"symbol-detail-header-right-number-item"}>
-                成交量: {tranNumber(this.state.ticker.baseVolume, 2)}
-              </Text>
+              <View className={"symbol-detail-header-right-item-container"}>
+                <Text className={`symbol-detail-header-right-text-item`}>成交量: </Text>
+                <Text className={"symbol-detail-header-right-number-item"}>
+                  {tranNumber(this.state.ticker.baseVolume, 2)}
+                </Text>
+              </View>
             </View>
             <View className={"symbol-detail-header-right-second"}>
-              <Text className={"symbol-detail-header-right-number-item"}>
-                今开: {this.state.ticker.open}
-              </Text>
-              <Text className={"symbol-detail-header-right-number-item"}>
-                昨收: {this.state.ticker.close && this.state.ticker.close.toFixed(2)}
-              </Text>
-              <Text className={"symbol-detail-header-right-number-item"}>
-                成交额: {tranNumber(this.state.ticker.quoteVolume, 2)}
-              </Text>
+              <View className={"symbol-detail-header-right-item-container"}>
+                <Text className={`symbol-detail-header-right-text-item`}>今开: </Text>
+                <Text className={"symbol-detail-header-right-number-item"}>
+                  {this.state.ticker.open}
+                </Text>
+              </View>
+              <View className={"symbol-detail-header-right-item-container"}>
+                <Text className={`symbol-detail-header-right-text-item`}>昨收: </Text>
+                <Text className={"symbol-detail-header-right-number-item"}>
+                  {this.state.ticker.close && this.state.ticker.close.toFixed(2)}
+                </Text>
+              </View>
+              <View className={"symbol-detail-header-right-item-container"}>
+                <Text className={`symbol-detail-header-right-text-item`}> 成交额: </Text>
+                <Text className={"symbol-detail-header-right-number-item"}>
+                  {tranNumber(this.state.ticker.quoteVolume, 2)}
+                </Text>
+              </View>
             </View>
           </View>
 
