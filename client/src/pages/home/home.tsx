@@ -54,7 +54,7 @@ class Home extends Component<IProps, IState> {
 
 
   async onPullDownRefresh() {
-    await this.getData()
+    // await this.getData()
   }
 
   async getData() {

@@ -1,0 +1,17 @@
+.extend-container {
+  .content {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    word-break: break-all;
+  }
+
+  .switch {
+    right: 0;
+    color: #9A9A9A;
+    margin-top: 10px;
+    display: inline-block;
+    font-weight: bold;
+  }
+}
