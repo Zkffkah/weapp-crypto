@@ -1,4 +1,4 @@
-# flutter_posy
+# weapp-crypto
 
 A crypto market tracking wechat app built with Taro、TypeScript and ccxt
   <table><tr>
